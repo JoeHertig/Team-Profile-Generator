@@ -1,5 +1,4 @@
 // required const's
-const profileDataArgs = process.argv.slice(2, process.argv.length);
 const fs = require("fs");
 const inquirer = require("inquirer");
 const generatePage = require("./src/page-template");
@@ -9,6 +8,9 @@ const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+
+// Array
+const employeeArray = [];
 
 // first prompt
 const startingPrompt = () => {
@@ -67,7 +69,23 @@ const startingPrompt = () => {
         },
       },
     ])
-    .then(selectOption);
+    .then(function (data) {
+      const managerName = data.managerName;
+      const managerId = data.managerId;
+      const managerEmail = data.managerEmail;
+      const managerOffice = data.managerOffice;
+      const employeeMember = new Manager(
+        managerName,
+        managerId,
+        managerEmail,
+        managerOffice
+      );
+      employeeArray.push(employeeMember);
+      // test code
+      console.log(employeeArray);
+      // go to selection option
+      selectOption();
+    });
 };
 
 // Prompt for Engineer
@@ -127,7 +145,23 @@ const promptEngineer = () => {
         },
       },
     ])
-    .then(selectOption);
+    .then(function (data) {
+      const engineerName = data.engineerName;
+      const engineerId = data.engineerId;
+      const engineerEmail = data.engineerEmail;
+      const engineerGithub = data.engineerGithub;
+      const employeeMember = new Engineer(
+        engineerName,
+        engineerId,
+        engineerEmail,
+        engineerGithub
+      );
+      employeeArray.push(employeeMember);
+      // test code
+      console.log(employeeArray);
+      // go to selection option
+      selectOption();
+    });
 };
 
 // Prompt for Intern
@@ -187,7 +221,23 @@ const promptIntern = () => {
         },
       },
     ])
-    .then(selectOption);
+    .then(function (data) {
+      const internName = data.internName;
+      const internId = data.internId;
+      const internEmail = data.internEmail;
+      const internSchool = data.internSchool;
+      const employeeMember = new Intern(
+        internName,
+        internId,
+        internEmail,
+        internSchool
+      );
+      employeeArray.push(employeeMember);
+      // test code
+      console.log(employeeArray);
+      // go to selection option
+      selectOption();
+    });
 };
 
 const selectOption = () => {
